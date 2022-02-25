@@ -1,0 +1,45 @@
+@use 'variables' as var;
+//Mixins
+@mixin box-sizing($box-model) {
+    box-sizing: $box-model;
+}
+
+@mixin imagen-fondo($imagen) {
+    background-image: url($imagen);
+    background-repeat: no-repeat;
+}
+
+//Botones
+@mixin boton($color_back, $color_font) {
+    background-color: $color_back;
+    color: $color_font;
+    display: block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+//Gradiente
+@mixin gradiente($color1, $color2) {
+    background-image: linear-gradient(to right, $color1, $color2);
+}
+
+//Media queries este diseño esta hecho en mobile first
+@mixin mobile {
+    @media screen and (min-width: #{var.$small}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: #{var.$medium}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: #{var.$big}) {
+        @content;
+    }
+}

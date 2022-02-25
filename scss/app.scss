@@ -1,0 +1,235 @@
+@use 'variables' as var;
+@use 'mixins';
+@use "sass:color";
+html {
+    @include mixins.box-sizing(border-box);
+}
+
+*,
+*:after,
+*:before {
+    @include mixins.box-sizing(inherit);
+}
+
+body {
+    font-family: var.$fuente_principal;
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+//Header
+.oculto {
+    display: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .logo {
+        padding: 1.4rem 0;
+    }
+    //media queries para desktop
+    @include mixins.desktop() {
+        padding: 0 0.5rem 0 0.5rem;
+        justify-content: space-between;
+    }
+}
+
+//Carrito
+.carrito-compras {
+    position: relative;
+    &:hover .contenido {
+        background-color: var.$gris;
+        display: block;
+        max-width: 400px;
+        padding: 1rem;
+        position: absolute;
+        right: 0;
+        img {
+            max-width: 150px;
+        }
+        .boton {
+            @include mixins.boton(var.$principal, var.$blanco);
+        }
+    }
+}
+
+//Hero
+.hero {
+    min-height: 24rem;
+    color: var.$blanco;
+    @include mixins.imagen-fondo('../img/hero.jpg');
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    .contenido-hero {
+        flex: 1;
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 400;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+        form {
+            position: relative;
+            @include mixins.tablet() {
+                width: 40%;
+            }
+            input[type="submit"] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include mixins.imagen-fondo('../img/lupa.png');
+                background-position: right;
+                height: 3rem;
+                width: 3rem;
+                display: block;
+                text-indent: -9999px;
+                border: none;
+                cursor: pointer;
+            }
+            input[type="text"] {
+                height: 3rem;
+                width: 100%;
+            }
+        }
+    }
+}
+
+//Barra de iconos 
+.barra {
+    min-height: 6rem;
+    padding: 1rem;
+    color: var.$blanco;
+    @include mixins.gradiente(var.$secundario, var.$terciario);
+    display: flex;
+    align-items: center;
+    .iconos {
+        text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        @include mixins.mobile() {
+            text-shadow: none;
+        }
+        @include mixins.desktop() {
+            flex-direction: row;
+        }
+        .icono {
+            flex: 1;
+            background-size: 2.4rem;
+            text-align: center;
+            background-position: 5% center;
+            @include mixins.tablet {
+                background-position: 20% center;
+            }
+            @include mixins.desktop {
+                background-position: left center;
+            }
+            &.icono1 {
+                @include mixins.imagen-fondo('../img/icono1.png');
+            }
+            &.icono2 {
+                @include mixins.imagen-fondo('../img/icono2.png');
+            }
+            &.icono3 {
+                @include mixins.imagen-fondo('../img/icono3.png');
+            }
+        }
+    }
+}
+
+//h1 cursos en linea
+.encabezado {
+    text-align: center;
+}
+
+//Cursos
+.cursos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .curso {
+        min-width: 15rem;
+        .imagen-curso {
+            width: 100%;
+        }
+        flex: 0 1 calc(50% - 1rem);
+        border: 1px solid color.scale(var.$gris, $lightness: -20%);
+        margin-bottom: 1rem;
+        @include mixins.tablet() {
+            flex: 0 1 calc(33% - 1rem);
+        }
+        @include mixins.desktop() {
+            flex: 0 1 calc(25% - 1rem);
+        }
+        .info-curso {
+            padding: 1rem;
+            h4 {
+                margin: 0;
+                font-size: 1.2rem;
+            }
+            .precio {
+                display: flex;
+                justify-content: space-between;
+                .regular {
+                    text-decoration: line-through;
+                    color: crimson;
+                }
+                .oferta {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    color: green;
+                }
+            }
+            .boton {
+                @include mixins.boton(var.$secundario, var.$blanco);
+                transition: 0.5s;
+                transform: scale(1);
+            }
+            .boton:hover {
+                //boton hover crece
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+//Footer
+.footer {
+    border: 1px solid color.scale(var.$gris, $lightness: -20%);
+    margin-top: 1rem;
+    padding-top: 2rem;
+    .contenedor-footer {
+        display: flex;
+        flex-direction: column;
+        @include mixins.mobile() {
+            flex-direction: row;
+        }
+        .menu {
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            flex: 1;
+            @include mixins.desktop() {
+                flex: 0 1 calc(30% - 1rem);
+            }
+            a {
+                font-weight: 500;
+                color: var.$negro;
+                text-decoration: none;
+                margin-bottom: 0.5rem;
+            }
+            a:hover {
+                color: #b12f7d;
+            }
+        }
+    }
+}
